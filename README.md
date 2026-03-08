@@ -1,5 +1,6 @@
 # sociomile-angga
 
+Sociomile is an omnichannel customer support platform designed with a service-oriented approach and scalable architecture.
 Workspace for the Sociomile Project implementation.
 
 ## Projects
