@@ -1,0 +1,7 @@
+DROP TABLE IF EXISTS activity_logs;
+DROP TABLE IF EXISTS tickets;
+DROP TABLE IF EXISTS messages;
+DROP TABLE IF EXISTS conversations;
+DROP TABLE IF EXISTS customers;
+DROP TABLE IF EXISTS users;
+DROP TABLE IF EXISTS tenants;

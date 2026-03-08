@@ -1,0 +1,200 @@
+{
+  "info": {
+    "_postman_id": "4b4dc39d-c418-4ebe-8e11-f1c6ea0d6f34",
+    "name": "sociomile-be",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": "Postman collection for sociomile-be API"
+  },
+  "variable": [
+    { "key": "base_url", "value": "http://localhost:8080" },
+    { "key": "token", "value": "" },
+    { "key": "tenant_id", "value": "1" },
+    { "key": "customer_external_id", "value": "cust-001" },
+    { "key": "conversation_id", "value": "1" },
+    { "key": "ticket_id", "value": "1" }
+  ],
+  "item": [
+    {
+      "name": "Health",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": "{{base_url}}/health"
+      }
+    },
+    {
+      "name": "Auth",
+      "item": [
+        {
+          "name": "Login",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"angga@email.com\",\n  \"password\": \"123456\"\n}"
+            },
+            "url": "{{base_url}}/auth/login"
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('status code is 200', function () {",
+                  "  pm.response.to.have.status(200);",
+                  "});",
+                  "var json = pm.response.json();",
+                  "if (json && json.data && json.data.token) {",
+                  "  pm.collectionVariables.set('token', json.data.token);",
+                  "}"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Channel",
+      "item": [
+        {
+          "name": "Webhook",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"tenant_id\": {{tenant_id}},\n  \"customer_external_id\": \"{{customer_external_id}}\",\n  \"message\": \"Hello from customer\"\n}"
+            },
+            "url": "{{base_url}}/channel/webhook"
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('status code is 200', function () {",
+                  "  pm.response.to.have.status(200);",
+                  "});",
+                  "var json = pm.response.json();",
+                  "if (json && json.data && json.data.conversation_id) {",
+                  "  pm.collectionVariables.set('conversation_id', String(json.data.conversation_id));",
+                  "}"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Conversation",
+      "item": [
+        {
+          "name": "List Conversations",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "url": "{{base_url}}/conversations?status=&assigned_agent=&limit=20&offset=0"
+          }
+        },
+        {
+          "name": "Conversation Detail",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "url": "{{base_url}}/conversations/{{conversation_id}}"
+          }
+        },
+        {
+          "name": "Agent Reply",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"message\": \"Hi, we are checking your issue.\"\n}"
+            },
+            "url": "{{base_url}}/conversations/{{conversation_id}}/messages"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Ticket",
+      "item": [
+        {
+          "name": "Escalate Conversation",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"Escalated issue\",\n  \"description\": \"Need internal follow up\",\n  \"priority\": \"high\"\n}"
+            },
+            "url": "{{base_url}}/conversations/{{conversation_id}}/escalate"
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('status code is 201', function () {",
+                  "  pm.response.to.have.status(201);",
+                  "});",
+                  "var json = pm.response.json();",
+                  "if (json && json.data && json.data.id) {",
+                  "  pm.collectionVariables.set('ticket_id', String(json.data.id));",
+                  "}"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "List Tickets",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "url": "{{base_url}}/tickets?status=&assigned_agent=&limit=20&offset=0"
+          }
+        },
+        {
+          "name": "Update Ticket Status (Admin)",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"status\": \"in_progress\"\n}"
+            },
+            "url": "{{base_url}}/tickets/{{ticket_id}}/status"
+          }
+        }
+      ]
+    }
+  ]
+}
