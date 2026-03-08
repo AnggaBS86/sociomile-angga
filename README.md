@@ -1,5 +1,6 @@
 # sociomile-angga
 
+Sociomile is an omnichannel customer support platform designed with a service-oriented approach and scalable architecture.
 Workspace for the Sociomile Project implementation.
 
 ## Projects
@@ -55,3 +56,18 @@ sociomile-angga/
 ├── sociomile-be/
 └── sociomile-fe/
 ```
+
+## User Interface Result
+
+**Login Page** 
+```text
+username : angga@email.com
+password : 123456
+```
+
+<img width="1842" height="1000" alt="Screenshot from 2026-03-09 01-39-58" src="https://github.com/user-attachments/assets/6e827db4-90c5-41ac-b22a-5e628b1271d1" />
+
+
+**Dashboard Page**
+<img width="1842" height="1000" alt="Screenshot from 2026-03-09 01-40-06" src="https://github.com/user-attachments/assets/10dc1c5c-b59d-4ee3-947f-da57ae3df2c8" />
+
