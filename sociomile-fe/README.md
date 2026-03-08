@@ -38,3 +38,13 @@ VITE_API_BASE_URL=http://127.0.0.1:8080
 email: angga@email.com
 password: 123456
 ```
+
+## User Interface Result
+
+**Login Page** 
+<img width="1842" height="1000" alt="Screenshot from 2026-03-09 01-39-58" src="https://github.com/user-attachments/assets/6e827db4-90c5-41ac-b22a-5e628b1271d1" />
+
+
+**Dashboard Page**
+<img width="1842" height="1000" alt="Screenshot from 2026-03-09 01-40-06" src="https://github.com/user-attachments/assets/10dc1c5c-b59d-4ee3-947f-da57ae3df2c8" />
+
