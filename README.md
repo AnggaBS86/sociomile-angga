@@ -1,6 +1,6 @@
 # sociomile-angga
 
-Workspace for the Sociomile take-home implementation.
+Workspace for the Sociomile Project implementation.
 
 ## Projects
 
