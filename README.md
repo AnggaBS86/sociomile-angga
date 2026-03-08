@@ -60,6 +60,11 @@ sociomile-angga/
 ## User Interface Result
 
 **Login Page** 
+```text
+username : angga@email.com
+password : 123456
+```
+
 <img width="1842" height="1000" alt="Screenshot from 2026-03-09 01-39-58" src="https://github.com/user-attachments/assets/6e827db4-90c5-41ac-b22a-5e628b1271d1" />
 
 
