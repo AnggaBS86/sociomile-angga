@@ -15,7 +15,7 @@ React frontend for the Sociomile backend.
 ## Run
 
 ```bash
-cd "/media/user/New Volume/go/sociomile-angga/sociomile-fe"
+cd "/sociomile-angga/sociomile-fe"
 npm install
 npm run dev
 ```
